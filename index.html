@@ -15,14 +15,15 @@
     <div class="container">
       <h1 class="text-center">Jogo da Forca - Henrique e Emily</h1>
       <div class="float-right">
-        Tentativas incorretas: <span id="mistakes">0</span> de
-        <span id="maxWrong">6</span>
+        Tentativas incorretas: <span id="erros">0</span> de
+        <span id="maxErros"></span>
       </div>
       <div class="text-center">
+        <img id="imagemForca" src="./imagens/forca0.png">
         <p id="dica">Advinhe a palavra:</p>
         <span id="sublinhados"></span>
-        <p id="wordSpotlight">Insira a palavra aqui</p>
-        <div id="keyboard"></div>
+        <p id="palavraDestacada">Insira a palavra aqui</p>
+        <div id="teclado"></div>
         <button class="btn btn-info" onclick="reset()">Limpar</button>
       </div>
     </div>
