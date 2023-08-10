@@ -1,47 +1,65 @@
-const palavras = [
-  ["Animal", "Macaco", "Cachorro", "Orangotango", "Rinoceronte"],
-  ["Fruta", "Abacate", "Tomate", "Graviola", "Cupuacu"],
+const listaPalavras = [
+  {
+    dica: "Animal",
+    palavras: ["Macaco", "Cachorro", "Orangotango", "Rinoceronte"],
+  },
+  { dica: "Fruta", palavras: ["Abacate", "Tomate", "Graviola", "Cupuacu"] },
 ];
 
-let categoriaSorteada;
-let palavraSorteada = '';
-let resposta = '';
+let dica;
+let palavraSorteada = "";
 let maxErros = 6;
 let erros = 0;
 let chute = [];
 let statusDaPalavra = null;
 
 function sorteiaPalavra() {
-  const indiceCategoriaSorteada = Math.floor(Math.random() * palavras.length);
-  categoriaSorteada = palavras[indiceCategoriaSorteada][0];
+  const indiceObjeto = Math.floor(Math.random() * listaPalavras.length);
+  dica = listaPalavras[indiceObjeto].dica;
+  console.log(dica);
 
-  const indicePalavraSorteada =
-    Math.floor(Math.random() * (palavras[indiceCategoriaSorteada].length - 1)) +
-    1;
-  palavraSorteada = palavras[indiceCategoriaSorteada][indicePalavraSorteada];
+  const indicePalavra = Math.floor(
+    Math.random() * listaPalavras[indiceObjeto].palavras.length
+  );
+  palavraSorteada = listaPalavras[indiceObjeto].palavras[indicePalavra];
+  console.log(palavraSorteada);
 }
 
 function gerarBotoes() {
-  let botoesHTML = 'abcdefghijklmnopqrstuvwxyz'.split('').map(letra =>
-    `
+  let botoesHTML = "abcdefghijklmnopqrstuvwxyz"
+    .split("")
+    .map(
+      (letra) =>
+        `
       <button
         class="btn btn-lg btn-primary m-2"
-        id='` + letra + `'
-        onClick="verificaChute('` + letra + `')"
+        id='` +
+        letra +
+        `'
+        onClick="verificaChute('` +
+        letra +
+        `')"
       >
-       ` + letra + `
+       ` +
+        letra +
+        `
       </button>
-    `).join('');
+    `
+    )
+    .join("");
 
-  document.getElementById('teclado').innerHTML = botoesHTML
-};
+  document.getElementById("teclado").innerHTML = botoesHTML;
+}
 
-document.getElementById('maxErros').innerHTML = maxErros
+document.getElementById("maxErros").innerHTML = maxErros;
 
 function advinhaPalavra() {
-  statusDaPalavra = resposta.split('').map(letra => (chute.indexOf(letra) >= 0 ? letra : '_')).join('');
+  statusDaPalavra = palavraSorteada
+    .split("")
+    .map((letra) => (chute.indexOf(letra) >= 0 ? letra : "_"))
+    .join("");
 
-  document.getElementById('palavraDestacada').innerHTML = statusDaPalavra
+  document.getElementById("palavraDestacada").innerHTML = statusDaPalavra;
 }
 
 function escreveDica(dica) {
@@ -50,14 +68,16 @@ function escreveDica(dica) {
 }
 
 function escreveSublinhados() {
+  let spanSublinhados = document.getElementById("sublinhados");
   for (let i = 0; i < palavraSorteada.length; i++) {
-    let spanSublinhados = document.getElementById("sublinhados");
-    spanSublinhados.innerHTML += "<span> _ </span>";
+    spanSublinhados.innerHTML += `<span id=${letras[i]}> _ </span>`;
   }
 }
 
 sorteiaPalavra();
+let palavraMaiuscula = palavraSorteada.toUpperCase();
+let letras = palavraMaiuscula.split("");
 gerarBotoes();
 advinhaPalavra();
-escreveDica(categoriaSorteada);
+escreveDica(dica);
 escreveSublinhados();
