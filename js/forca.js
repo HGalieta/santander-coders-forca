@@ -54,24 +54,25 @@ function gerarBotoes() {
 document.getElementById("maxErros").innerHTML = maxErros;
 
 function advinhaPalavra() {
-  statusDaPalavra = palavraSorteada
-    .split("")
-    .map((letra) => (chute.indexOf(letra) >= 0 ? letra : "_"))
+  statusDaPalavra = letras
+    .map((letra) => (chute.indexOf(letra) >= 0 ? letra : " _ "))
     .join("");
 
   document.getElementById("palavraDestacada").innerHTML = statusDaPalavra;
 }
 
+function verificaChute(letraChutada) {
+  chute.push(letraChutada.toUpperCase());
+  document.getElementById(letraChutada).setAttribute("disabled", true);
+
+  if (letras.includes(letraChutada.toUpperCase())) {
+    advinhaPalavra();
+  }
+}
+
 function escreveDica(dica) {
   let paragrafoDica = document.getElementById("dica");
   paragrafoDica.innerText = `A dica é: ${dica}`;
-}
-
-function escreveSublinhados() {
-  let spanSublinhados = document.getElementById("sublinhados");
-  for (let i = 0; i < palavraSorteada.length; i++) {
-    spanSublinhados.innerHTML += `<span id=${letras[i]}> _ </span>`;
-  }
 }
 
 sorteiaPalavra();
@@ -80,4 +81,3 @@ let letras = palavraMaiuscula.split("");
 gerarBotoes();
 advinhaPalavra();
 escreveDica(dica);
-escreveSublinhados();
