@@ -67,7 +67,19 @@ function verificaChute(letraChutada) {
 
   if (letras.includes(letraChutada.toUpperCase())) {
     advinhaPalavra();
+  } else {
+    adicionaErro();
   }
+}
+
+function adicionaErro() {
+  erros++;
+
+  document.getElementById("erros").innerText = erros;
+
+  document
+    .getElementById("imagemForca")
+    .setAttribute("src", `imagens/forca${erros}.png`);
 }
 
 function escreveDica(dica) {
