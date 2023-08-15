@@ -1,0 +1,34 @@
+.btn-info {
+  background-color: #875438;
+  border-color: #875438;
+}
+
+.btn-info:hover {
+  background-color: black;
+  border-color: black;
+}
+
+.btn-info:focus {
+  background-color: #875438;
+  border-color: #875438;
+  box-shadow: unset;
+}
+
+.btn-info.active  {
+  background-color: #875438;
+  border-color: #875438;
+  box-shadow: unset;
+}
+
+.text-center {
+    padding: 35px;
+}
+
+img {
+  padding: 25px;
+}
+
+div#teclado {
+  padding: 18px;
+}
+
