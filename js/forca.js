@@ -1,17 +1,48 @@
 const listaPalavras = [
   {
     dica: "Animal",
-    palavras: ["MACACO", "CACHORRO", "ORANGOTANGO", "RINOCERONTE"],
+    palavras: ["MACACO", "CACHORRO", "ORANGOTANGO", "RINOCERONTE", "AVESTRUZ"],
   },
-  { dica: "Fruta", palavras: ["ABACATE", "TOMATE", "GRAVIOLA", "BANANA"] },
+  {
+    dica: "Fruta",
+    palavras: ["ABACATE", "TOMATE", "GRAVIOLA", "BANANA", "SERIGUELA"],
+  },
+  {
+    dica: "Profissão",
+    palavras: ["PROFESSOR", "MEDICO", "DESENVOLVEDOR", "MOTORISTA", "PADEIRO"],
+  },
+  {
+    dica: "Doce",
+    palavras: ["DONNUT", "TIRAMISSU", "CUPCAKE", "SORVETE", "MARSHMALLOW"],
+  },
+  {
+    dica: "Marcas em geral",
+    palavras: ["LYCRA", "GILLETTE", "XEROX", "TUPPERWARE", "BOMBRIL"],
+  },
+  {
+    dica: "Microsoft",
+    palavras: ["TYPESCRIPT", "POWERPOINT", "VISUALSTUDIO", "WINDOWS", "XBOX"],
+  },
 ];
 
 let dica;
 let palavraSorteada = "";
 let maxErros = 6;
-let erros = 0;
-let chute = [];
+let errosDoUsuario = 0;
+let chutes = [];
 let statusDaPalavra = null;
+let letras = [];
+document.getElementById("maxErros").innerHTML = maxErros;
+inicializaJogo();
+
+function inicializaJogo() {
+  sorteiaPalavra();
+  let palavraMaiuscula = palavraSorteada.toUpperCase();
+  letras = palavraMaiuscula.split("");
+  gerarBotoes();
+  escrevePalavra();
+  escreveDica(dica);
+}
 
 function sorteiaPalavra() {
   const indiceObjeto = Math.floor(Math.random() * listaPalavras.length);
@@ -49,22 +80,25 @@ function gerarBotoes() {
   document.getElementById("teclado").innerHTML = botoesHTML;
 }
 
-document.getElementById("maxErros").innerHTML = maxErros;
-
-function advinhaPalavra() {
+function escrevePalavra() {
   statusDaPalavra = letras
-    .map((letra) => (chute.indexOf(letra) >= 0 ? letra : " _ "))
+    .map((letra) => (chutes.indexOf(letra) >= 0 ? letra : " _ "))
     .join("");
 
   document.getElementById("palavraDestacada").innerHTML = statusDaPalavra;
 }
 
+function escreveDica(dica) {
+  let paragrafoDica = document.getElementById("dica");
+  paragrafoDica.innerText = `A dica é: ${dica}`;
+}
+
 function verificaChute(letraChutada) {
-  chute.push(letraChutada.toUpperCase());
+  chutes.push(letraChutada.toUpperCase());
   document.getElementById(letraChutada).setAttribute("disabled", true);
 
   if (letras.includes(letraChutada.toUpperCase())) {
-    advinhaPalavra();
+    escrevePalavra(letras);
     verificaSeGanhou();
   } else {
     adicionaErro();
@@ -80,7 +114,7 @@ function verificaSeGanhou() {
 }
 
 function verificaSePerdeu() {
-  if (erros === maxErros) {
+  if (errosDoUsuario === maxErros) {
     document.getElementById(
       "palavraDestacada"
     ).innerHTML = `A resposta era: ${palavraSorteada}`;
@@ -90,36 +124,21 @@ function verificaSePerdeu() {
 }
 
 function adicionaErro() {
-  erros++;
+  errosDoUsuario++;
 
-  document.getElementById("erros").innerText = erros;
+  document.getElementById("erros").innerText = errosDoUsuario;
 
-  document
-    .getElementById("imagemForca")
-    .setAttribute("src", `imagens/forca${erros}.png`);
-}
-
-function escreveDica(dica) {
-  let paragrafoDica = document.getElementById("dica");
-  paragrafoDica.innerText = `A dica é: ${dica}`;
+  document.getElementById(
+    "imagemForca"
+  ).src = `imagens/forca${errosDoUsuario}.png`;
 }
 
 function limpar() {
-  erros = 0;
-  chute = [];
+  errosDoUsuario = 0;
+  chutes = [];
   document.getElementById("imagemForca").src = "./imagens/forca0.png";
-  document.getElementById("erros").innerText = erros;
-
-  sorteiaPalavra();
-  gerarBotoes();
-  advinhaPalavra();
-  escreveDica(dica);
+  document.getElementById("erros").innerText = errosDoUsuario;
   document.getElementById("resetar").innerText = "Resetar Jogo";
-}
 
-sorteiaPalavra();
-let palavraMaiuscula = palavraSorteada.toUpperCase();
-let letras = palavraMaiuscula.split("");
-gerarBotoes();
-advinhaPalavra();
-escreveDica(dica);
+  inicializaJogo();
+}
