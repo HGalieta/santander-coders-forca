@@ -9,22 +9,24 @@
       integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
     <title>Jogo da Forca - Henrique e Emily</title>
   </head>
   <body>
     <div class="container">
-      <h1 class="text-center">Jogo da Forca - Henrique e Emily</h1>
-      <div class="float-right">
-        Tentativas incorretas: <span id="erros">0</span> de
-        <span id="maxErros"></span>
-      </div>
-      <div class="text-center">
+      <h1 class="text-center titulo">Jogo da Forca - Henrique e Emily</h1>
+      <div class="text-center main">
         <img id="imagemForca" src="./imagens/forca0.png" />
         <p id="dica"></p>
         <p id="palavraDestacada"></p>
+        <div class="text-center erros">
+          Tentativas incorretas: <span id="erros">0</span> de
+          <span id="maxErros"></span>
+        </div>
         <div id="teclado"></div>
-        <button class="btn btn-info" onclick="limpar()">Limpar</button>
+        <button id="resetar" class="btn btn-info" onclick="limpar()">
+          Resetar Jogo
+        </button>
       </div>
     </div>
     <script type="text/javascript" src="js/forca.js"></script>
