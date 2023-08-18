@@ -1,11 +1,12 @@
 .btn-info {
+  font-size: 1.5rem;
   background-color: #875438;
   border-color: #875438;
 }
 
 .btn-info:hover {
-  background-color: black;
-  border-color: black;
+  background-color: #503120;
+  border-color: #503120;
 }
 
 .btn-info:focus {
@@ -14,14 +15,14 @@
   box-shadow: unset;
 }
 
-.btn-info.active  {
-  background-color: #875438;
-  border-color: #875438;
+.btn-info:active {
+  background-color: black !important;
+  border-color: black !important;
   box-shadow: unset;
 }
 
 .text-center {
-    padding: 35px;
+  padding: 35px;
 }
 
 img {
@@ -30,5 +31,35 @@ img {
 
 div#teclado {
   padding: 18px;
+  font-size: 2rem;
+  color: #0b4e69;
 }
 
+.btn-primary {
+  background-color: #0b4e69;
+  border-color: #0b4e69;
+}
+
+#dica {
+  font-size: 2rem;
+  color: #875438;
+}
+
+#palavraDestacada {
+  font-size: 2.5rem;
+  color: #875438;
+}
+
+.titulo {
+  color: #875438;
+}
+
+.erros,
+.main {
+  padding: 0;
+}
+
+.erros {
+  font-size: 1.5rem;
+  color: #875438;
+}
